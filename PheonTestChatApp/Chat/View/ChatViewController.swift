@@ -183,7 +183,7 @@ class ChatViewController: UIViewController, ChatViewProtocol, UITextViewDelegate
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
         sendButton.isEnabled = !textView.text.isEmpty
-        sendButton.tintColor = textView.text.isEmpty ? .systemGray : .systemBlue
+        sendButton.tintColor = textView.text.isEmpty ? .systemGray : .label
         adjustInputTextViewHeight()
     }
 
@@ -209,6 +209,19 @@ class ChatViewController: UIViewController, ChatViewProtocol, UITextViewDelegate
         }
         
         snapshot.appendItems([message], toSection: 0)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot, animatingDifferences: true) { [weak self] in
+            self?.scrollToBottom()
+        }
+    }
+    
+    private func scrollToBottom() {
+        // Ensure there’s at least one item to scroll to
+        guard !dataSource.snapshot().itemIdentifiers.isEmpty else { return }
+        
+        // Scroll to the last item
+        let lastItemIndex = dataSource.snapshot().numberOfItems(inSection: 0) - 1
+        let indexPath = IndexPath(item: lastItemIndex, section: 0)
+        
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
 }

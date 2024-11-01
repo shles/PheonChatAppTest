@@ -15,7 +15,7 @@ class ChatMessageCell: UICollectionViewCell {
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
+        label.font = .rounded(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -44,14 +44,14 @@ class ChatMessageCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8),
-            messageLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8),
+            messageLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 16),
+            messageLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -16),
             messageLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16),
             messageLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -16)
         ])
         
-        bubbleViewLeadingConstraint = bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8)
-        bubbleViewTrailingConstraint = bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+        bubbleViewLeadingConstraint = bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+        bubbleViewTrailingConstraint = bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
     }
     
     required init?(coder: NSCoder) {
