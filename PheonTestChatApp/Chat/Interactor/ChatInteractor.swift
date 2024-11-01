@@ -30,6 +30,7 @@ class ChatReverseInteractor: ChatInteractorProtocol {
     }
     
     private func performReversal(on message: String) async -> String {
+        try? await Task.sleep(for: .seconds(0.5))
         return String(message.reversed())
     }
 }
